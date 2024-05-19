@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest  # This specifies the virtual machine runner environment
     steps:
       - uses: actions/checkout@v3  # Checks out your code from the repository
-      - name: Crawl articles data
+      - name: Crawl article data
         run: python article_crawler.py
-      - name: Crawl Stock data
+      - name: Crawl stock data
         run: python stock_crawler.py
