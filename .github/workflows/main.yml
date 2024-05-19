@@ -1,0 +1,15 @@
+name: Daily Crawling Data
+
+on:
+  schedule:
+  - cron: "0 17 * * *"
+
+jobs:
+  daily-task:
+    runs-on: ubuntu-latest  # This specifies the virtual machine runner environment
+    steps:
+      - uses: actions/checkout@v3  # Checks out your code from the repository
+      - name: Crawl articles data
+        run: python article_crawler.py
+      - name: Crawl Stock data
+        run: python stock_crawler.py
