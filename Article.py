@@ -8,7 +8,7 @@ class Article:
         self.metadata = []
         self.hash_table = {}
 
-    def crawl_raw(self, num_pages):
+    def crawl_page(self, num_pages):
         responses = ""
 
         for i in range(num_pages):
