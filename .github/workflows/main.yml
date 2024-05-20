@@ -2,7 +2,7 @@ name: Daily Crawling Data
 
 on:
   schedule:
-  - cron: "0 17 * * *"
+  - cron: "33 14 * * *"
 
 jobs:
   daily-task:
