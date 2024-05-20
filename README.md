@@ -17,4 +17,4 @@ python article_crawler.py
 ```
 
 By default, stock symbols used in dataset are "FPT", "VCB", "HPG", "VPB", "VNM" and "VIC". Meanwhile, articles are downloaded from VnExpress.
-In case user wants to crawl other stock symbol, clone the repo and change `stock_list` in stock_crawler.py to desid value.
+In case user wants to crawl other stock symbol, clone the repo and change `stock_list` in stock_crawler.py to desired value.
