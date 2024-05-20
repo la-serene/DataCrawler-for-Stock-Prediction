@@ -1,4 +1,4 @@
-name: Daily Crawling Data
+name: Daily Crawl Data
 
 on:
   schedule:
