@@ -16,7 +16,7 @@ def main(start_date, end_date):
     """
     stock_list = ["FPT", "VCB", "HPG", "VPB", "VNM", "VIC"]
 
-    with open("./data/stock.json", "r", encoding="utf-8") as f:
+    with open("sample_data/stock.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
     for i in stock_list:
@@ -25,7 +25,7 @@ def main(start_date, end_date):
         df['time'] = df['time'].dt.strftime('%Y-%m-%d')
         data[i] = df.to_dict(orient='list')
 
-    with open('./data/stock.json', 'w') as f:
+    with open('sample_data/stock.json', 'w') as f:
         json.dump(data, f, indent=4)
 
     print(data)

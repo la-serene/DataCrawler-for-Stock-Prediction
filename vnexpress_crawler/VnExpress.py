@@ -45,6 +45,6 @@ class VnExpress(Article):
         year = today.year
         month = today.month
         day = today.day
-        filename = "./data/article-{}-{}-{}.json".format(year, month, day)
+        filename = "./sample_data/article-{}-{}-{}.json".format(year, month, day)
         with open(filename, "w") as f:
             json.dump(data, f, indent=4)

@@ -10,7 +10,7 @@ def collect_financial_data(start_date, end_date):
         "US 500": "^GSPC"  # S&P 500
     }
 
-    # Fetch data for each ticker
+    # Fetch sample_data for each ticker
     data = {}
     for name, ticker in tickers.items():
         stock = yf.Ticker(ticker)
@@ -23,9 +23,9 @@ def collect_financial_data(start_date, end_date):
 
 def save_to_csv(data):
     for index, df in data.items():
-        filename = f"data/{index.replace(' ', '_').lower()}_data.csv"
+        filename = f"sample_data/{index.replace(' ', '_').lower()}_data.csv"
         df.to_csv(filename)
-        print(f"Saved {index} data to {filename}")
+        print(f"Saved {index} sample_data to {filename}")
 
 
 if __name__ == "__main__":

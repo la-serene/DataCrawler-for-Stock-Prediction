@@ -72,7 +72,7 @@ def crawl_article_by_numOfPages(num_pages):
 
             data.append([title, datetime, content])
 
-        with open("data/article.csv", "a", encoding="utf-8") as f:
+        with open("sample_data/article.csv", "a", encoding="utf-8") as f:
             write = csv.writer(f)
             write.writerow(fields)
             write.writerows(data)
