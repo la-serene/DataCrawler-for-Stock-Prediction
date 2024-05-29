@@ -4,7 +4,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-from Article import Article
+from vnexpress_crawler.Article import Article
 
 
 class VnExpress(Article):

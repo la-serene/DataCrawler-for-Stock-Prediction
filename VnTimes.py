@@ -1,4 +1,5 @@
-import pandas as pd
+import csv
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -13,7 +14,7 @@ def parse_header(raw_article):
     title = soup.find("h1", class_="article-detail-title f0")
     datetime = soup.find("span", class_="article-detail-publish")
 
-    return title.text, datetime.text
+    return str(title.text).strip(), str(datetime.text).strip()
 
 
 def parse_paragraph(raw_article):
@@ -24,7 +25,7 @@ def parse_paragraph(raw_article):
     for paragraph in paragraphs:
         content += paragraph.text
 
-    return content
+    return str(content.strip()).strip()
 
 
 def crawl_article_by_numOfPages(num_pages):
@@ -37,7 +38,8 @@ def crawl_article_by_numOfPages(num_pages):
     delay = 10
 
     topic_url = "https://vietnamtimes.org.vn/economy"
-    df = []
+    fields = ["Title", "Datetime", "Description"]
+    data = []
     for i in tqdm(range(1, num_pages + 1)):
         page_url = topic_url + "&s_cond=&BRSR={}".format((i - 1) * 20)
         driver.get(page_url)
@@ -68,12 +70,14 @@ def crawl_article_by_numOfPages(num_pages):
 
             content = parse_paragraph(content_wrapper_raw)
 
-            row = {"Title": title, "Datetime": datetime, "Content": content}
-            df.append(row)
+            data.append([title, datetime, content])
 
-    # df.to_csv("vntimes.csv")
-    print(df)
+        with open("data/article.csv", "a", encoding="utf-8") as f:
+            write = csv.writer(f)
+            write.writerow(fields)
+            write.writerows(data)
 
 
 if __name__ == "__main__":
-    crawl_article_by_numOfPages(2)
+    num_pages = int(input("Enter the desired number of pages for crawling: "))
+    crawl_article_by_numOfPages(num_pages)
