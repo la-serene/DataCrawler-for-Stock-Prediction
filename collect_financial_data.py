@@ -29,8 +29,14 @@ def save_to_csv(data):
 
 
 if __name__ == "__main__":
-    start_date = "2020-01-01"
-    end_date = "2024-12-31"
+    start_date = input("Enter start date (yy-mm-dd):")
+    if start_date == "\n":
+        start_date = "2020-01-01"
+
+    end_date = input("Enter end date (yy-mm-dd): ")
+    if end_date == "\n":
+        end_date = "2024-12-31"
+
     data = collect_financial_data(start_date, end_date)
     save_to_csv(data)
     print("Data collection complete.")

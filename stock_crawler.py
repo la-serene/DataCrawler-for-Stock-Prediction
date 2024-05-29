@@ -32,4 +32,12 @@ def main(start_date, end_date):
 
 
 if __name__ == '__main__':
-    main()
+    start_date = input("Enter start date (yy-mm-dd):")
+    if start_date == "\n":
+        start_date = "2020-01-01"
+
+    end_date = input("Enter end date (yy-mm-dd): ")
+    if end_date == "\n":
+        end_date = "2024-12-31"
+
+    main(start_date, end_date)
