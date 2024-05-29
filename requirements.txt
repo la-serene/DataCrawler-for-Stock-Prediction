@@ -45,7 +45,7 @@ urllib3==2.2.1
 vnai==0.1.0
 vnstock3==0.3.0.1
 webencodings==0.5.1
-yfinance==0.2.38
+yfinance~=0.2.40
 annotated-types==0.6.0
 appdirs==1.4.4
 beautifulsoup4==4.12.3
@@ -94,3 +94,5 @@ vnai==0.1.0
 vnstock3==0.3.0.1
 webencodings==0.5.1
 yfinance==0.2.38
+
+selenium~=4.21.0

@@ -8,10 +8,10 @@ class Article:
         self.metadata = []
         self.hash_table = {}
 
-    def crawl_page(self, num_pages):
+    def crawl_page(self, page):
         responses = ""
 
-        for i in range(num_pages):
+        for i in range(page):
             topic_url = self.base_url + self.topic + "-p{}".format(i + 1)
             response = requests.get(topic_url)
             responses += response.content.decode()

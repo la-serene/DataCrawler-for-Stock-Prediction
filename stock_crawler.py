@@ -8,23 +8,20 @@ if "ACCEPT_TC" not in os.environ:
 from vnstock3 import *
 
 
-def main():
+def main(start_date, end_date):
+    """
+        Crawl stock by OCHLV.
+        Date should follow yy-mm-dd format.
+    :return:
+    """
     stock_list = ["FPT", "VCB", "HPG", "VPB", "VNM", "VIC"]
 
     with open("./data/stock.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    today = datetime.datetime.now()
-    year = today.year
-    month = today.month
-    day = today.day
-    if month < 10:
-        month = "0" + str(month)
-    date = "{}-{}-{}".format(year, month, day)
-
     for i in stock_list:
         stock = Vnstock().stock(symbol=i, source='VCI')
-        df = stock.quote.history(start='2023-01-01', end=date, interval='1D')
+        df = stock.quote.history(start=start_date, end=end_date, interval='1D')
         df['time'] = df['time'].dt.strftime('%Y-%m-%d')
         data[i] = df.to_dict(orient='list')
 
