@@ -39,8 +39,8 @@ def crawl_article_by_numOfPages(num_pages):
 
     topic_url = "https://vietnamtimes.org.vn/economy"
     fields = ["Title", "Datetime", "Description"]
-    data = []
     for i in tqdm(range(1, num_pages + 1)):
+        data = []
         page_url = topic_url + "&s_cond=&BRSR={}".format((i - 1) * 20)
         driver.get(page_url)
 
@@ -55,12 +55,18 @@ def crawl_article_by_numOfPages(num_pages):
         url_wrappers = soup.find_all("a", class_="article-image")
         for url_wrapper in url_wrappers:
             article_url = url_wrapper.attrs["href"]
-
+            print(article_url)
             driver.get(article_url)
-            WebDriverWait(driver, delay).until(EC.presence_of_element_located((
-                By.CSS_SELECTOR,
-                "div.google-auto-placed.ap_container")
-            ))
+
+            try:
+                WebDriverWait(driver, delay).until(EC.presence_of_element_located((
+                    By.CSS_SELECTOR,
+                    "div.google-auto-placed.ap_container")
+                ))
+            except Exception as e:
+                print(f"Error loading page {article_url}: {e}")
+                continue
+
             info_wrapper = driver.find_element(By.CSS_SELECTOR, "div.article-detail.fw.clearfix")
             info_wrapper_raw = info_wrapper.get_attribute("outerHTML")
             title, datetime = parse_header(info_wrapper_raw)
@@ -74,9 +80,8 @@ def crawl_article_by_numOfPages(num_pages):
 
         with open("sample_data/article.csv", "a", encoding="utf-8") as f:
             write = csv.writer(f)
-            write.writerow(fields)
             write.writerows(data)
-
+            
 
 if __name__ == "__main__":
     num_pages = int(input("Enter the desired number of pages for crawling: "))

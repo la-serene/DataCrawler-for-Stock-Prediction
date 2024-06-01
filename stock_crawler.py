@@ -1,5 +1,5 @@
 import json
-import datetime
+import csv
 import os
 
 if "ACCEPT_TC" not in os.environ:
@@ -16,19 +16,17 @@ def main(start_date, end_date):
     """
     stock_list = ["FPT", "VCB", "HPG", "VPB", "VNM", "VIC"]
 
-    with open("sample_data/stock.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
 
     for i in stock_list:
         stock = Vnstock().stock(symbol=i, source='VCI')
         df = stock.quote.history(start=start_date, end=end_date, interval='1D')
-        df['time'] = df['time'].dt.strftime('%Y-%m-%d')
-        data[i] = df.to_dict(orient='list')
 
-    with open('sample_data/stock.json', 'w') as f:
-        json.dump(data, f, indent=4)
+        # df['time'] = df['time'].dt.strftime('%Y-%m-%d')
+        # list(df)
 
-    print(data)
+    with open('sample_data/stock_ochlv.csv', 'w') as f:
+        write = csv.writer(f)
+        write.writerow(['symbol', 'time', 'open', 'high', 'low', 'close', 'volume'])
 
 
 if __name__ == '__main__':
